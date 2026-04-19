@@ -2,9 +2,12 @@
 data_loader.py — Handles loading, cleaning, and exporting the RPS data.
 
 This file contains all functions related to getting data in and out of
-the program. It can read from CSV and JSON formats, and export to JSON.
+the program. It can read from CSV, JSON, and TXT formats, and export to
+JSON. All loaders run the same cleaning pipeline (strip whitespace,
+lowercase choices, drop missing values, drop invalid rows).
 """
 
+import io
 import pandas as pd
 import json
 
@@ -12,18 +15,40 @@ import json
 VALID_CHOICES = ["rock", "paper", "scissors"]
 
 
+def _clean_dataframe(df):
+    """Shared cleaning pipeline used by every loader.
+
+    Strips whitespace, lowercases choices, removes rows that are missing
+    data, and removes rows whose choice isn't rock/paper/scissors.
+
+    Parameters:
+        df (pd.DataFrame): Raw frame with user, round, choice columns.
+
+    Returns:
+        pd.DataFrame: The cleaned frame (index reset).
+    """
+    df["user"] = df["user"].astype(str).str.strip()
+    df["choice"] = df["choice"].astype(str).str.strip().str.lower()
+
+    missing_count = int(df.isnull().sum().sum())
+    if missing_count > 0:
+        print(f"  Removed {missing_count} missing values.")
+        df = df.dropna()
+
+    invalid_mask = ~df["choice"].isin(VALID_CHOICES)
+    invalid_count = int(invalid_mask.sum())
+    if invalid_count > 0:
+        print(f"  Removed {invalid_count} invalid choices.")
+        df = df[~invalid_mask]
+
+    return df.reset_index(drop=True)
+
+
 def load_csv(filepath):
     """Load a CSV file into a pandas DataFrame and clean it up.
 
-    Steps:
-        1. Read the CSV file using pandas.
-        2. Strip whitespace from text columns (in case of typos).
-        3. Convert choices to lowercase so 'Rock' and 'rock' match.
-        4. Remove any rows with missing values.
-        5. Remove any rows where the choice isn't rock, paper, or scissors.
-
     Parameters:
-        filepath (str): The path to the CSV file.
+        filepath (str or file-like): Path or uploaded file buffer.
 
     Returns:
         pd.DataFrame: The cleaned data, or None if the file wasn't found.
@@ -34,27 +59,7 @@ def load_csv(filepath):
         print(f"  Error: Could not find the file '{filepath}'")
         return None
 
-    # Strip whitespace and lowercase the text columns
-    df["user"] = df["user"].str.strip()
-    df["choice"] = df["choice"].str.strip().str.lower()
-
-    # Count and drop rows with missing data
-    missing_count = df.isnull().sum().sum()
-    if missing_count > 0:
-        print(f"  Removed {missing_count} missing values.")
-        df = df.dropna()
-
-    # Keep only rows with valid choices (rock, paper, or scissors)
-    invalid_mask = ~df["choice"].isin(VALID_CHOICES)
-    invalid_count = invalid_mask.sum()
-    if invalid_count > 0:
-        print(f"  Removed {invalid_count} invalid choices.")
-        df = df[~invalid_mask]
-
-    # Reset the index so row numbers start fresh after removing rows
-    df = df.reset_index(drop=True)
-
-    return df
+    return _clean_dataframe(df)
 
 
 def load_json(filepath):
@@ -64,20 +69,85 @@ def load_json(filepath):
         [{"user": "Dana", "round": 1, "choice": "rock"}, ...]
 
     Parameters:
-        filepath (str): The path to the JSON file.
+        filepath (str or file-like): Path or uploaded file buffer.
 
     Returns:
-        pd.DataFrame: The loaded data, or None if file wasn't found.
+        pd.DataFrame: The cleaned data, or None if file wasn't found.
     """
     try:
-        with open(filepath, "r") as f:
-            data = json.load(f)
-        df = pd.DataFrame(data)
-        df["choice"] = df["choice"].str.strip().str.lower()
-        return df
+        if hasattr(filepath, "read"):
+            data = json.load(filepath)
+        else:
+            with open(filepath, "r") as f:
+                data = json.load(f)
     except FileNotFoundError:
         print(f"  Error: Could not find the file '{filepath}'")
         return None
+
+    df = pd.DataFrame(data)
+    return _clean_dataframe(df)
+
+
+def load_txt(filepath):
+    """Load data from a whitespace- or comma-separated TXT file.
+
+    Accepts a plain-text file where each row has user, round, choice
+    separated by whitespace, commas, or tabs. The first row may be a
+    header (user round choice) — if so it's detected automatically.
+
+    Parameters:
+        filepath (str or file-like): Path or uploaded file buffer.
+
+    Returns:
+        pd.DataFrame: The cleaned data, or None if file wasn't found.
+    """
+    try:
+        if hasattr(filepath, "read"):
+            raw = filepath.read()
+            if isinstance(raw, bytes):
+                raw = raw.decode("utf-8")
+            buffer = io.StringIO(raw)
+        else:
+            buffer = open(filepath, "r")
+    except FileNotFoundError:
+        print(f"  Error: Could not find the file '{filepath}'")
+        return None
+
+    # Auto-detect delimiter: comma, tab, or whitespace
+    try:
+        df = pd.read_csv(buffer, sep=None, engine="python")
+    finally:
+        if hasattr(buffer, "close"):
+            buffer.close()
+
+    # Normalize column names in case they're cased differently
+    df.columns = [c.strip().lower() for c in df.columns]
+    return _clean_dataframe(df)
+
+
+def load_any(filepath, filename=None):
+    """Dispatch to the right loader based on file extension.
+
+    Used by the Streamlit app so one button handles CSV, JSON, and TXT
+    uploads. Extension is taken from `filename` if provided (useful when
+    `filepath` is a buffer), otherwise from `filepath`.
+
+    Parameters:
+        filepath (str or file-like): Path or uploaded file buffer.
+        filename (str): Optional name used only to read the extension.
+
+    Returns:
+        pd.DataFrame or None: Cleaned data, or None if format unsupported.
+    """
+    name = (filename or str(filepath)).lower()
+    if name.endswith(".csv"):
+        return load_csv(filepath)
+    if name.endswith(".json"):
+        return load_json(filepath)
+    if name.endswith(".txt"):
+        return load_txt(filepath)
+    print(f"  Error: unsupported file type '{name}'")
+    return None
 
 
 def export_to_json(df, filepath):

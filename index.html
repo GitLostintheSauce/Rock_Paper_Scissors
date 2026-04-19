@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Can AI Predict Human Randomness? — RPS Analysis Dashboard</title>
+<style>
+  :root {
+    --bg: #f6f7fb; --card: #ffffff; --ink: #1f2430; --muted: #5b6478;
+    --accent: #4A90D9; --accent2: #E8915A; --good: #2f9e6a; --bad: #c0392b;
+    --border: #e3e6ef;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, sans-serif; background: var(--bg); color: var(--ink);
+    line-height: 1.55;
+  }
+  header.hero {
+    background: linear-gradient(135deg, #4A90D9 0%, #7B5FD0 100%);
+    color: white; padding: 3rem 1.5rem 3.5rem; text-align: center;
+  }
+  header.hero h1 { margin: 0 0 .5rem; font-size: 2.25rem; }
+  header.hero p.tagline { margin: 0 0 1rem; opacity: .92; font-size: 1.1rem; }
+  header.hero p.team { margin: 0; opacity: .8; font-size: .95rem; }
+  main { max-width: 1100px; margin: -2rem auto 3rem; padding: 0 1rem; }
+  section {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.5rem 1.75rem; margin-bottom: 1.5rem;
+    box-shadow: 0 4px 14px rgba(20, 30, 60, .04);
+  }
+  h2 { margin-top: 0; border-bottom: 2px solid var(--border);
+       padding-bottom: .5rem; }
+  h3 { margin-bottom: .25rem; color: var(--ink); }
+  .muted { color: var(--muted); font-size: .95rem; }
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem; margin-top: 1rem;
+  }
+  .kpi {
+    background: #f3f6ff; border: 1px solid var(--border); border-radius: 10px;
+    padding: 1rem; text-align: center;
+  }
+  .kpi .value { font-size: 1.85rem; font-weight: 700; color: var(--accent); }
+  .kpi .label { font-size: .85rem; color: var(--muted); text-transform: uppercase;
+               letter-spacing: .04em; margin-top: .25rem; }
+  figure { margin: 1rem 0; text-align: center; }
+  figure img { max-width: 100%; border: 1px solid var(--border);
+               border-radius: 8px; background: white; }
+  figcaption { color: var(--muted); font-size: .9rem; margin-top: .5rem; }
+  table {
+    width: 100%; border-collapse: collapse; margin: .75rem 0 1rem;
+    font-size: .95rem;
+  }
+  th, td { padding: .55rem .75rem; text-align: left;
+           border-bottom: 1px solid var(--border); }
+  th { background: #f3f6ff; font-weight: 600; color: var(--ink); }
+  tbody tr:hover { background: #fafbff; }
+  .card-grid, .cluster-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem; margin-top: .75rem;
+  }
+  .player-card, .cluster {
+    background: #f7f9ff; border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem;
+  }
+  .player-card h4, .cluster h4 { margin: 0 0 .5rem; color: var(--accent); }
+  .player-card ul, .cluster ul { margin: 0; padding-left: 1.2rem; }
+  .player-card li, .cluster li { margin: .2rem 0; font-size: .92rem; }
+  .note { color: var(--muted); font-size: .88rem; margin-top: .5rem; }
+  .checklist td code { font-size: .85rem; background: #eef2fa;
+                       padding: 1px 6px; border-radius: 4px; }
+  .section-tag { display: inline-block; padding: 2px 10px;
+                 background: var(--accent); color: white; border-radius: 999px;
+                 font-size: .72rem; letter-spacing: .05em; text-transform: uppercase;
+                 margin-right: .5rem; vertical-align: middle; }
+  footer { text-align: center; color: var(--muted); font-size: .85rem;
+           margin: 2rem 0 1rem; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <h1>Can AI Predict Human Randomness?</h1>
+  <p class="tagline">Rock-Paper-Scissors pattern analysis across
+     4 players and 100 rounds</p>
+  <p class="team">ENGR 010 Spring 2026 — Dana, Jarin, Eleanor, Krew</p>
+</header>
+
+<main>
+
+<section>
+  <h2>Key Findings</h2>
+  <div class="kpi-grid">
+    <div class="kpi">
+      <div class="value">61.5%</div>
+      <div class="label">Overall prediction accuracy</div>
+    </div>
+    <div class="kpi">
+      <div class="value">33.3%</div>
+      <div class="label">Random baseline</div>
+    </div>
+    <div class="kpi">
+      <div class="value">75.0%</div>
+      <div class="label">Most predictable: Jarin</div>
+    </div>
+    <div class="kpi">
+      <div class="value">1.554</div>
+      <div class="label">Max entropy observed (Dana)</div>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:1rem">
+    Our transition-matrix classifier beats random guessing by
+    <strong>28.2 percentage points</strong>. Humans
+    are measurably non-random — but some are more predictable than others.
+  </p>
+</section>
+
+<section>
+  <h2><span class="section-tag">Graph 1</span>Choice Frequencies</h2>
+  <p class="muted">How often does each player pick rock, paper, or scissors?
+     This is the baseline view of each player's preferences before we look
+     for deeper patterns.</p>
+  <figure>
+    <img src="graph1_choice_frequencies.png" alt="Choice frequency bar chart">
+    <figcaption>Figure 1 — Grouped bar chart of choice counts per player.</figcaption>
+  </figure>
+  <table><thead><tr><th>Player</th><th>Rock</th><th>Paper</th><th>Scissors</th><th>Favorite</th></tr></thead><tbody><tr><td>Dana</td><td>13 (52%)</td><td>7 (28%)</td><td>5 (20%)</td><td>Rock</td></tr><tr><td>Jarin</td><td>5 (20%)</td><td>11 (44%)</td><td>9 (36%)</td><td>Paper</td></tr><tr><td>Eleanor</td><td>9 (36%)</td><td>10 (40%)</td><td>6 (24%)</td><td>Paper</td></tr><tr><td>Krew</td><td>5 (20%)</td><td>11 (44%)</td><td>9 (36%)</td><td>Paper</td></tr></tbody></table>
+</section>
+
+<section>
+  <h2><span class="section-tag">Graph 2</span>Transition Patterns
+      <span class="muted" style="font-size:.85rem">(correlation matrices)</span></h2>
+  <p class="muted">A 3×3 matrix per player showing: <em>given the previous
+     move was X, how often is the next move Y?</em> Strong cells
+     (&gt; 50%) are reliable tells.</p>
+  <figure>
+    <img src="graph2_transition_heatmaps.png"
+         alt="Transition probability heatmaps">
+    <figcaption>Figure 2 — Transition heatmaps. Rows = previous move,
+       columns = next move.</figcaption>
+  </figure>
+  <h3>Strongest tendencies per player</h3>
+  <div class='card-grid'><div class='player-card'><h4>Dana</h4><ul><li>After <em>paper</em> -> plays <strong>rock</strong> 57% of the time</li><li>After <em>scissors</em> -> plays <strong>rock</strong> 60% of the time</li></ul></div><div class='player-card'><h4>Jarin</h4><ul><li>After <em>rock</em> -> plays <strong>paper</strong> 100% of the time</li><li>After <em>paper</em> -> plays <strong>scissors</strong> 73% of the time</li><li>After <em>scissors</em> -> plays <strong>paper</strong> 62% of the time</li></ul></div><div class='player-card'><h4>Eleanor</h4><ul><li>After <em>rock</em> -> plays <strong>rock</strong> 56% of the time</li><li>After <em>scissors</em> -> plays <strong>paper</strong> 50% of the time</li></ul></div><div class='player-card'><h4>Krew</h4><ul><li>After <em>rock</em> -> plays <strong>scissors</strong> 80% of the time</li><li>After <em>scissors</em> -> plays <strong>paper</strong> 100% of the time</li></ul></div></div>
+</section>
+
+<section>
+  <h2><span class="section-tag">Graph 3</span>Classification — Prediction Accuracy</h2>
+  <p class="muted">Using each player's transition matrix, we predict their
+     next move from their previous one, then measure how often the
+     prediction matches the actual move.</p>
+  <figure>
+    <img src="graph3_prediction_accuracy.png" alt="Prediction accuracy bar chart">
+    <figcaption>Figure 3 — Per-player prediction accuracy with the 33.3%
+       random-guess baseline.</figcaption>
+  </figure>
+  <table><thead><tr><th>Player</th><th>Accuracy</th><th>vs. Random (33.3%)</th><th>Verdict</th></tr></thead><tbody><tr><td>Dana</td><td>50.0%</td><td>+16.7 pts</td><td>Somewhat predictable</td></tr><tr><td>Jarin</td><td>75.0%</td><td>+41.7 pts</td><td>Very predictable</td></tr><tr><td>Eleanor</td><td>50.0%</td><td>+16.7 pts</td><td>Somewhat predictable</td></tr><tr><td>Krew</td><td>70.8%</td><td>+37.5 pts</td><td>Very predictable</td></tr></tbody></table>
+</section>
+
+<section>
+  <h2><span class="section-tag">Graph 4</span>Entropy — How Random Is Each Player?</h2>
+  <p class="muted">Entropy (bits, base-2) measures unpredictability. The
+     ceiling for a 3-choice game is log<sub>2</sub>(3) ≈ 1.585. Lower
+     scores mean more detectable patterns.</p>
+  <figure>
+    <img src="graph4_entropy.png" alt="Entropy bar chart">
+    <figcaption>Figure 4 — Shannon entropy per player vs. the
+       perfectly-random ceiling.</figcaption>
+  </figure>
+  <table><thead><tr><th>Player</th><th>Rounds</th><th>Favorite</th><th>Least Used</th><th>Longest Streak</th><th>Entropy (/1.585)</th></tr></thead><tbody><tr><td>Dana</td><td>25</td><td>Rock</td><td>Scissors</td><td>3</td><td>1.469</td></tr><tr><td>Jarin</td><td>25</td><td>Paper</td><td>Rock</td><td>2</td><td>1.516</td></tr><tr><td>Eleanor</td><td>25</td><td>Paper</td><td>Scissors</td><td>5</td><td>1.554</td></tr><tr><td>Krew</td><td>25</td><td>Paper</td><td>Rock</td><td>2</td><td>1.516</td></tr></tbody></table>
+</section>
+
+<section>
+  <h2><span class="section-tag">Graph 5</span>Regression — Trends Over Time</h2>
+  <p class="muted">Linear regression on each player's round-by-round
+     choices detects slowly-shifting habits. A positive slope means the
+     player picks that move more as the game goes on.</p>
+  <figure>
+    <img src="graph5_trends.png" alt="Running-percentage trend charts">
+    <figcaption>Figure 5 — Running percentage of each move per player
+       over 25 rounds.</figcaption>
+  </figure>
+  <table><thead><tr><th>Player</th><th>Rock slope (trend)</th><th>Paper slope (trend)</th><th>Scissors slope (trend)</th></tr></thead><tbody><tr><td>Dana</td><td>+0.0015 (stable)</td><td>-0.0031 (stable)</td><td>+0.0015 (stable)</td></tr><tr><td>Jarin</td><td>-0.0008 (stable)</td><td>+0.0015 (stable)</td><td>-0.0008 (stable)</td></tr><tr><td>Eleanor</td><td>+0.0185 (increasing)</td><td>-0.0262 (decreasing)</td><td>+0.0077 (stable)</td></tr><tr><td>Krew</td><td>+0.0008 (stable)</td><td>+0.0000 (stable)</td><td>-0.0008 (stable)</td></tr></tbody></table>
+</section>
+
+<section>
+  <h2>Clustering — Play-Style Groups (K-Means)</h2>
+  <p class="muted">Each player becomes a 3-D point (% rock, % paper,
+     % scissors). K-Means groups similar points. Implemented manually
+     with NumPy so you can see every step.</p>
+  <div class='cluster-grid'><div class='cluster'><h4>Cluster 1</h4><ul><li><strong>Dana</strong> — Rock 52%, Paper 28%, Scissors 20%</li></ul></div><div class='cluster'><h4>Cluster 2</h4><ul><li><strong>Jarin</strong> — Rock 20%, Paper 44%, Scissors 36%</li><li><strong>Eleanor</strong> — Rock 36%, Paper 40%, Scissors 24%</li><li><strong>Krew</strong> — Rock 20%, Paper 44%, Scissors 36%</li></ul></div></div><p class='note'>K-Means converged in 2 iterations.</p>
+</section>
+
+<section class="checklist">
+  <h2>Requirements Checklist</h2>
+  <p class="muted">Every spec bullet from the ENGR 010 project description
+     mapped to the code that satisfies it.</p>
+
+  <h3>1. Data Management</h3>
+  <table><thead><tr><th>Requirement</th><th>Where It&#x27;s Met</th></tr></thead><tbody>
+    <tr><td>CSV import</td><td>data_loader.py -&gt; load_csv()</td></tr>
+    <tr><td>JSON import</td><td>data_loader.py -&gt; load_json()</td></tr>
+    <tr><td>TXT import</td><td>data_loader.py -&gt; load_txt()</td></tr>
+    <tr><td>Cleaning &amp; preprocessing</td><td>data_loader.py -&gt; _clean_dataframe() (strip, lowercase, dropna)</td></tr>
+    <tr><td>Handles missing values</td><td>data_loader.py -&gt; _clean_dataframe() dropna()</td></tr>
+    <tr><td>Handles outliers (invalid choices)</td><td>data_loader.py -&gt; _clean_dataframe() filters to VALID_CHOICES</td></tr>
+    <tr><td>Organized storage</td><td>pandas DataFrames + nested dicts + NumPy arrays</td></tr>
+  </tbody></table>
+
+  <h3>2. Analysis Features (3+ algorithms)</h3>
+  <table><thead><tr><th>Algorithm / Requirement</th><th>Where It&#x27;s Met</th></tr></thead><tbody>
+    <tr><td>Classification</td><td>analysis.py -&gt; predict_next_move() + calculate_prediction_accuracy()</td></tr>
+    <tr><td>Clustering (K-Means, manual)</td><td>analysis.py -&gt; cluster_users_kmeans()</td></tr>
+    <tr><td>Regression (least-squares)</td><td>analysis.py -&gt; regression_analysis()</td></tr>
+    <tr><td>Statistical metrics</td><td>analysis.py -&gt; compute_stats() (entropy, streaks, freq)</td></tr>
+    <tr><td>Patterns &amp; correlations</td><td>analysis.py -&gt; build_transition_matrix()</td></tr>
+    <tr><td>Comparative analysis</td><td>All dashboards compare every player side-by-side</td></tr>
+  </tbody></table>
+
+  <h3>3. Visualization Features</h3>
+  <table><thead><tr><th>Requirement</th><th>Where It&#x27;s Met</th></tr></thead><tbody>
+    <tr><td>Static plots of distributions</td><td>visualizations.py -&gt; plot_choice_frequencies()</td></tr>
+    <tr><td>Correlation-style matrix</td><td>visualizations.py -&gt; plot_transition_heatmaps()</td></tr>
+    <tr><td>Trend analysis charts</td><td>visualizations.py -&gt; plot_trends()</td></tr>
+    <tr><td>Interactive dashboard</td><td>index.html (this page) + CLI menu in rps_analysis.py</td></tr>
+  </tbody></table>
+
+  <h3>4. Python Concepts</h3>
+  <table><thead><tr><th>Requirement</th><th>Where It&#x27;s Met</th></tr></thead><tbody>
+    <tr><td>Numerical data types</td><td>NumPy arrays + floats throughout analysis.py</td></tr>
+    <tr><td>Clear variable naming</td><td>transition_matrices, accuracy_dict, frequency_dict, etc.</td></tr>
+    <tr><td>Constants</td><td>VALID_CHOICES, USERS (ALL_CAPS) in analysis.py / visualizations.py</td></tr>
+    <tr><td>if/elif/else</td><td>rps_analysis.py -&gt; run_interactive(); display_accuracy()</td></tr>
+    <tr><td>for loops</td><td>analysis.py -&gt; every algorithm iterates USERS and VALID_CHOICES</td></tr>
+    <tr><td>while loops</td><td>analysis.py -&gt; build_transition_matrix(); cluster_users_kmeans()</td></tr>
+    <tr><td>try/except</td><td>data_loader.py -&gt; load_csv/json/txt; rps_analysis.py EOFError guard</td></tr>
+    <tr><td>5+ custom functions</td><td>20+ functions across data_loader / analysis / visualizations</td></tr>
+    <tr><td>Parameters &amp; return values</td><td>Every function declares typed parameters and returns results</td></tr>
+    <tr><td>Docstrings</td><td>Every public function has a Parameters/Returns docstring</td></tr>
+    <tr><td>Multiple Python files</td><td>data_loader.py, analysis.py, visualizations.py, rps_analysis.py, build_dashboard.py</td></tr>
+    <tr><td>Lists (time-series)</td><td>analysis.py -&gt; choices_list in build_transition_matrix()</td></tr>
+    <tr><td>Dictionaries (parameters)</td><td>freq_dict, accuracy_dict, stats, regression_results</td></tr>
+    <tr><td>NumPy arrays (signal processing)</td><td>np.zeros((3,3)) transitions; centers[] in K-Means</td></tr>
+    <tr><td>NumPy signal processing</td><td>argmax classification; Euclidean distance in K-Means</td></tr>
+    <tr><td>Pandas</td><td>data_loader.py reads/cleans; analysis.py filters DataFrames</td></tr>
+    <tr><td>3+ matplotlib plot types</td><td>Bar (graphs 1,3,4), Heatmap (graph 2), Line (graph 5)</td></tr>
+    <tr><td>Statistical analysis</td><td>Entropy, accuracy %, regression slopes, frequency distributions</td></tr>
+  </tbody></table>
+</section>
+
+<footer>
+  Generated April 19, 2026 at 16:37 · static dashboard built by
+  <code>build_dashboard.py</code>.
+</footer>
+
+</main>
+</body>
+</html>
