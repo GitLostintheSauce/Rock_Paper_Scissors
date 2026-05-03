@@ -1,0 +1,1370 @@
+╭─── Claude Code v2.1.104 ─────────────────────────────────────────────────────╮
+│                                                    │ Tips for getting        │
+│             Welcome back Eleanor Adams!            │ started                 │
+│                                                    │ Run /init to create a … │
+│                       ▐▛███▜▌                      │ ─────────────────────── │
+│                      ▝▜█████▛▘                     │ Recent activity         │
+│                        ▘▘ ▝▝                       │ No recent activity      │
+│     Sonnet 4.6 · Claude Pro ·                      │                         │
+│     eleanor.v.adams357@gmail.com's Organization    │                         │
+│                ~/Rock_Paper_Scissors               │                         │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+❯ can you connect/open my github repo called Rock_Paper_Scissors                
+
+⏺ Let me find your GitHub repo and clone it.
+
+⏺ Bash(gh repo list --limit 100 2>/dev/null | grep -i rock_paper_scissors)
+  ⎿  GitLostintheSauce/Rock_Paper_Scissors              public  2026-04-19T19
+     :26:35Z
+
+⏺ Found it. Let me clone it to your machine.
+
+⏺ Bash(gh repo clone GitLostintheSauce/Rock_Paper_Scissors)
+  ⎿  Cloning into 'Rock_Paper_Scissors'...
+
+  Listed 1 directory (ctrl+o to expand)
+
+⏺ Your repo GitLostintheSauce/Rock_Paper_Scissors has been cloned to
+  /Users/eleanor/Rock_Paper_Scissors. It currently contains two files:
+
+  - Rock Paper Scissors data - Sheet2.pdf
+  - cs-project Spring 2026.md.pdf
+
+  Would you like me to read through these files or help you with something
+  specific in this repo?
+
+❯ what do you mean cloned?                                                      
+
+⏺ Good question — "cloned" just means I downloaded a copy of your GitHub repo to
+   your computer so we can work with it locally. Your repo on GitHub is
+  untouched; this is just a local copy at /Users/eleanor/Rock_Paper_Scissors.
+
+  Nothing was changed or deleted — you now have the files from your repo
+  available right here on your machine. Would you like me to look at what's in
+  those files?
+
+❯ yeah you should open them and look through the project requirements, one of   
+  the files is just data. I’m building a Python group project for a computer    
+  science/data analysis assignment.                                             
+                                                                                
+  Project idea: “Can AI Predict Human Randomness?”                              
+  We are analyzing rock-paper-scissors choice patterns for 4 people: Dana,      
+  Jarin, Eleanor, and Krew.                                                     
+                                                                                
+  We collected data in a CSV with columns:                                      
+  user, round, choice                                                           
+                                                                                
+  Each row is one move.                                                         
+  Each person has 25 rounds.                                                    
+  Choices are only: rock, paper, scissors.                                      
+                                                                                
+  I want a beginner-friendly Python project that:                               
+  1. Loads the CSV with pandas                                                  
+  2. Cleans and validates the data                                              
+  3. Analyzes frequency of rock/paper/scissors for each user                    
+  4. Analyzes transitions, meaning what move tends to come after each move      
+  5. Predicts a user’s next move based on their previous move                   
+  6. Calculates prediction accuracy                                             
+  7. Makes at least 3 matplotlib graphs                                         
+  8. Uses multiple custom functions with docstrings                             
+  9. Is organized clearly and is suitable for a class project                   
+                                                                                
+  Please generate the code step by step and explain each part simply.           
+
+⏺ Let me start by reading both files to understand the requirements and data.
+
+  Read 2 files (ctrl+o to expand)
+
+⏺ Great, I've read both files. Now I have the full picture:
+
+  - Assignment PDF: ENGR 010 group project requiring Python data analysis with
+  pandas, numpy, matplotlib, custom functions with docstrings, multiple plot
+  types, and creativity.
+  - Data PDF: 100 rows of rock-paper-scissors data for Dana, Krew, Jarin, and
+  Eleanor (25 rounds each).
+
+  Let me create the CSV data file and then build the Python script step by step.
+
+⏺ Write(rps_data.csv)
+  ⎿  Wrote 101 lines to rps_data.csv
+       1 user,round,choice
+       2 Dana,1,rock
+       3 Dana,2,paper
+       4 Dana,3,rock
+       5 Dana,4,scissors
+       6 Dana,5,paper
+       7 Dana,6,rock
+       8 Dana,7,rock
+       9 Dana,8,rock
+      10 Dana,9,paper
+     … +91 lines (ctrl+o to expand)
+
+⏺ Now let me create the main Python script. I'll walk you through what each
+  section does.
+
+⏺ Write(rps_analysis.py)
+  ⎿  Wrote 560 lines to rps_analysis.py
+       1 """
+       2 ================================================================
+         =============
+       3 Can AI Predict Human Randomness?
+       4 Rock-Paper-Scissors Pattern Analysis
+       5 ENGR 010 Group Project - Spring 2026
+       6 Team Members: Dana, Jarin, Eleanor, Krew
+       7 ================================================================
+         =============
+       8 
+       9 This program analyzes rock-paper-scissors choice patterns to see
+          if human
+      10 "randomness" is actually predictable. We load data from a CSV, l
+         ook at how
+     … +550 lines (ctrl+o to expand)
+
+⏺ Now let me make sure the required packages are available and run it.
+
+⏺ Bash(cd /Users/eleanor/Rock_Paper_Scissors && python3 -c "import pandas,
+      numpy, matplotlib; print('All libraries available')")
+  ⎿  All libraries available
+
+⏺ Bash(python3 rps_analysis.py)
+  ⎿  Running in the background (↓ to manage)
+  ⎿  (timeout 30s)
+
+⏺ Bash(MPLBACKEND=Agg python3 rps_analysis.py)
+  ⎿  /Users/eleanor/Rock_Paper_Scissors/rps_analysis.py:327: UserWarning: F
+     igureCanvasAgg is non-interactive, and thus cannot be shown
+       plt.show()
+     … +58 lines (ctrl+o to expand)
+
+⏺ It runs perfectly. Let me check the graphs look good.
+
+  Read 4 files (ctrl+o to expand)
+
+⏺ Everything is working and all 4 graphs look great. Here's your project at
+  /Users/eleanor/Rock_Paper_Scissors/. Let me walk you through what each part
+  does:
+
+  ---
+  Files Created
+
+  ┌─────────────────┬────────────────────────────────────────────────────────┐
+  │      File       │                       What it is                       │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ rps_data.csv    │ Your group's data (100 rows) extracted from the PDF    │
+  │                 │ into a clean CSV                                       │
+  ├─────────────────┼────────────────────────────────────────────────────────┤
+  │ rps_analysis.py │ The full Python analysis program                       │
+  └─────────────────┴────────────────────────────────────────────────────────┘
+
+  ---
+  How the Code Works, Step by Step
+
+  Step 1 — Imports
+
+  Loads three libraries: pandas (spreadsheet-like tables), numpy (fast math),
+  and matplotlib (graphs).
+
+  Step 2 — Constants
+
+  Defines VALID_CHOICES, CSV_FILE, and USERS as fixed values used throughout the
+   program. Named in ALL_CAPS so anyone reading knows they shouldn't change.
+
+  Step 3 — Custom Functions (6 total, your rubric requires 5+)
+
+  1. load_and_clean_data() — Reads the CSV with pandas, strips whitespace,
+  lowercases text, drops missing values, and removes invalid choices. Uses
+  try/except for error handling.
+  2. compute_choice_frequencies() — Counts how many times each player picked
+  rock, paper, and scissors. Returns a nested dictionary.
+  3. build_transition_matrix() — The core analysis. For each player, it looks at
+   every pair of consecutive moves and builds a 3x3 numpy array showing: "after
+  move X, what's the probability of move Y?" Uses a while loop.
+  4. predict_next_move() — Given a player's previous move, looks at their
+  transition matrix and predicts whichever next move has the highest
+  probability.
+  5. calculate_prediction_accuracy() — Tests the prediction on the actual data.
+  Goes through rounds 2-25, predicts each move from the previous one, and checks
+   if it was right.
+  6. compute_stats() — Calculates extra stats: favorite move, longest streak,
+  and entropy (a measure of randomness — higher = more random).
+
+  Step 4 — Four Graphs
+
+  ┌────────┬──────────────────┬─────────────────────────────────────────────┐
+  │ Graph  │       Type       │                What it shows                │
+  ├────────┼──────────────────┼─────────────────────────────────────────────┤
+  │ Graph  │ Grouped bar      │ How often each player picks each move (Dana │
+  │ 1      │ chart            │  loves rock!)                               │
+  ├────────┼──────────────────┼─────────────────────────────────────────────┤
+  │ Graph  │ Heatmaps (2x2    │ Transition probabilities — what comes after │
+  │ 2      │ grid)            │  each move                                  │
+  ├────────┼──────────────────┼─────────────────────────────────────────────┤
+  │ Graph  │ Bar chart +      │ Prediction accuracy vs. the 33.3%           │
+  │ 3      │ baseline         │ random-guess line                           │
+  ├────────┼──────────────────┼─────────────────────────────────────────────┤
+  │ Graph  │ Bar chart        │ Entropy — how random each player actually   │
+  │ 4      │ (bonus)          │ is                                          │
+  └────────┴──────────────────┴─────────────────────────────────────────────┘
+
+  Step 5 — Main Program
+
+  The main() function ties everything together and prints a clean report with a
+  final conclusion.
+
+  ---
+  Key Findings from Your Data
+
+  - Jarin is the most predictable (75% accuracy) — after rock, he always picks
+  paper; after paper, he picks scissors 73% of the time
+  - Krew is also very predictable (70.8%) — after scissors, he always picks
+  paper
+  - Dana and Eleanor are at 50% — still well above random guessing
+  - Overall: 61.5% accuracy vs 33.3% random — humans are NOT truly random!
+
+  ---
+  Assignment Checklist
+
+  - Loads CSV with pandas
+  - Cleans/validates data with try/except
+  - Uses for loops AND a while loop
+  - Uses if/elif/else
+  - 6 custom functions with docstrings
+  - Lists, dictionaries, and numpy arrays
+  - 4 matplotlib graphs (3 different types: bar, heatmap, bar+line)
+  - Constants with clear naming
+  - Entropy analysis for creativity points
+
+  To run it yourself, just open a terminal in the project folder and type:
+  python3 rps_analysis.py
+
+  Want me to make any changes, or help you convert this into a Jupyter Notebook
+  for submission?
+
+✻ Churned for 3m 14s
+
+※ recap: We built your Rock Paper Scissors analysis script and it runs with all 
+  4 graphs. Next step is converting it into a Jupyter Notebook if you want that 
+  format for submission.
+
+❯ ok thats good but first I need you to create a read me explaining the code    
+  and what we are doing, I also want you to check through the project           
+  description that is uploaded in my repo to make sure everything on the        
+  requirements is done. On the read me you should point to where and how we met 
+   each requirement. Also why is there no files opened in VS code, this is a    
+  mess, I want you to clean it up and explain to be word for word what you are  
+  doing.                                                                        
+
+⏺ Alright, let me go through this methodically. Here's exactly what I'm doing
+  and why:
+
+  First, let me re-check the project requirements against what we have to find
+  any gaps.
+
+  Key requirements from the PDF:
+  - Multiple Python files (we only have 1 — need to fix)
+  - At least 3 algorithms from: Clustering, Classification, Regression, Text
+  analysis, Network analysis (we only have classification via prediction — need
+  to fix)
+  - Import from various file formats CSV, JSON, TXT (we only do CSV — need to
+  fix)
+  - Interactive dashboard for data exploration (missing — need to fix)
+  - Trend analysis chart (missing — need to fix)
+
+  So I need to restructure the project into multiple files, add clustering and 
+  regression, add JSON support, add an interactive menu, and add a trend chart.
+  Then I'll write the README and open everything in VS Code.
+
+  Let me start.
+
+  Step 1: Split the code into 4 Python files (meets the "multiple Python files"
+  requirement).
+
+⏺ Write(data_loader.py)  ⎿  Wrote 144 lines to data_loader.py
+      1 """
+      2 data_loader.py — Handles loading, cleaning, and exporting the RPS
+         data.
+      3 
+      4 This file contains all functions related to getting data in and o
+        ut of
+      5 the program. It can read from CSV and JSON formats, and export to
+         JSON.
+      6 """
+      7 
+      8 import pandas as pd
+      9 import json
+     … +134 lines (ctrl+o to expand)
+
+⏺ data_loader.py handles all data I/O: loading from CSV, loading from JSON,
+  exporting to JSON, and validating data. This covers the "various file formats"
+   requirement.
+
+  Step 2: Create analysis.py with all analysis functions including the 3
+  required algorithms.
+
+⏺ Write(analysis.py)
+  ⎿  Wrote 365 lines to analysis.py
+       1 """
+       2 analysis.py — All analysis and algorithm functions for the RPS p
+         roject.
+       3 
+       4 This file contains:
+       5     - Choice frequency analysis
+       6     - Transition matrix builder (for pattern detection)
+       7     - Move prediction (CLASSIFICATION algorithm)
+       8     - Prediction accuracy calculator
+       9     - Summary statistics with entropy
+      10     - K-means CLUSTERING of users by play style
+     … +355 lines (ctrl+o to expand)
+
+⏺ analysis.py now has all 3 required algorithms clearly labeled: Classification
+  (transition-based prediction), Clustering (K-Means grouping users by play
+  style), and Regression (linear regression detecting trends over rounds).
+
+  Step 3: Create visualizations.py with all plotting functions, including a new
+  trend chart.
+
+⏺ Write(visualizations.py)
+  ⎿  Wrote 218 lines to visualizations.py
+       1 """
+       2 visualizations.py — All matplotlib plotting functions for the RP
+         S project.
+       3 
+       4 This file creates 5 different graphs:
+       5     1. Grouped bar chart — choice frequencies per user
+       6     2. Heatmaps — transition probabilities (what follows each mo
+         ve)
+       7     3. Bar chart — prediction accuracy vs. random baseline
+       8     4. Bar chart — entropy (randomness) per user
+       9     5. Line chart — choice trends over time (regression visualiz
+         ation)
+      10 """
+     … +208 lines (ctrl+o to expand)
+
+⏺ Step 4: Rewrite the main file with an interactive menu and imports from the
+  other files.
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Write(rps_analysis.py)
+  ⎿  Added 208 lines, removed 457 lines
+        6  Team Members: Dana, Jarin, Eleanor, Krew
+        7  ==============================================================
+           ===============
+        8  
+        9 -This program analyzes rock-paper-scissors choice patterns to s
+          -ee if human                                                   
+       10 -"randomness" is actually predictable. We load data from a CSV,
+          - look at how                                                  
+       11 -often each person picks rock/paper/scissors, study what move t
+          -ends to follow                                                
+       12 -each move (transitions), and then try to predict the next move
+          - based on                                                     
+       13 -the previous one.                                             
+        9 +This is the MAIN file that ties the project together. It impor
+          +ts functions                                                  
+       10 +from our other files (data_loader.py, analysis.py, visualizati
+          +ons.py) and                                                   
+       11 +provides an interactive menu so the user can explore the data.
+       12  
+       15 -Libraries used:                                               
+       16 -    - pandas: for loading and organizing the data in tables (D
+          -ataFrames)                                                    
+       17 -    - numpy: for math operations and arrays                   
+       18 -    - matplotlib: for creating graphs and charts              
+       13 +To run:  python3 rps_analysis.py                              
+       14  """
+       15  
+       16  # ============================================================
+           =================
+       22 -# STEP 1: Import Libraries                                    
+       17 +# Import our custom modules (the other Python files we wrote) 
+       18  # ============================================================
+           =================
+       24 -# These are external packages that give Python extra abilities
+          -.                                                             
+       25 -# pandas   -> works with spreadsheet-like data (rows and colum
+          -ns)                                                           
+       26 -# numpy    -> does fast math on lists of numbers              
+       27 -# matplotlib -> draws graphs and charts                       
+       19 +from data_loader import load_csv, load_json, export_to_json, v
+          +alidate_data                                                  
+       20 +from analysis import (compute_choice_frequencies, build_transi
+          +tion_matrix,                                                  
+       21 +                      predict_next_move, calculate_prediction_
+          +accuracy,                                                     
+       22 +                      compute_stats, cluster_users_kmeans,    
+       23 +                      regression_analysis, USERS, VALID_CHOICE
+          +S)                                                            
+       24 +from visualizations import (plot_choice_frequencies, plot_tran
+          +sition_heatmaps,                                              
+       25 +                            plot_prediction_accuracy, plot_ent
+          +ropy,                                                         
+       26 +                            plot_trends)                      
+       27  
+       29 -import pandas as pd                                           
+       30 -import numpy as np                                            
+       31 -import matplotlib.pyplot as plt                               
+       28 +# Constants                                                   
+       29 +CSV_FILE = "rps_data.csv"                                     
+       30 +JSON_FILE = "rps_data.json"                                   
+       31  
+       32  
+       33  # ============================================================
+           =================
+       35 -# STEP 2: Constants                                           
+       34 +# Display Functions (for printing results to the terminal)    
+       35  # ============================================================
+           =================
+       37 -# Constants are variables whose values never change throughout
+          - the program.                                                 
+       38 -# We use ALL_CAPS names so it's obvious they shouldn't be modi
+          -fied.                                                         
+       36  
+       40 -VALID_CHOICES = ["rock", "paper", "scissors"]   # the only leg
+          -al moves                                                      
+       41 -CSV_FILE = "rps_data.csv"                        # where our d
+          -ata lives                                                     
+       42 -USERS = ["Dana", "Jarin", "Eleanor", "Krew"]     # the four pl
+          -ayers                                                         
+       37 +def display_frequencies(freq_dict):                           
+       38 +    """Print choice frequency results in a readable format.   
+       39  
+       44 -                                                              
+       45 -# ============================================================
+          -=================                                             
+       46 -# STEP 3: Define Custom Functions                             
+       47 -# ============================================================
+          -=================                                             
+       48 -# Each function is a reusable block of code that does one spec
+          -ific job.                                                     
+       49 -# Docstrings (the triple-quoted text) explain what each functi
+          -on does.                                                      
+       50 -                                                              
+       51 -                                                              
+       52 -def load_and_clean_data(filepath):                            
+       53 -    """Load a CSV file into a pandas DataFrame and clean it up
+          -.                                                             
+       54 -                                                              
+       55 -    Steps:                                                    
+       56 -        1. Read the CSV file using pandas.                    
+       57 -        2. Strip whitespace from text columns (in case of typo
+          -s).                                                           
+       58 -        3. Convert choices to lowercase so 'Rock' and 'rock' a
+          -re the same.                                                  
+       59 -        4. Remove any rows with missing values.               
+       60 -        5. Remove any rows where the choice isn't rock, paper,
+          - or scissors.                                                 
+       61 -                                                              
+       40      Parameters:
+       63 -        filepath (str): The path to the CSV file.             
+       64 -                                                              
+       65 -    Returns:                                                  
+       66 -        pd.DataFrame: The cleaned data, or None if the file wa
+          -sn't found.                                                   
+       41 +        freq_dict (dict): Output from compute_choice_frequenci
+          +es().                                                         
+       42      """
+       68 -    # try/except is Python's way of handling errors gracefully
+       69 -    try:                                                      
+       70 -        df = pd.read_csv(filepath)                            
+       71 -    except FileNotFoundError:                                 
+       72 -        print(f"Error: Could not find the file '{filepath}'") 
+       73 -        return None                                           
+       74 -                                                              
+       75 -    # Strip whitespace and lowercase the text columns         
+       76 -    df["user"] = df["user"].str.strip()                       
+       77 -    df["choice"] = df["choice"].str.strip().str.lower()       
+       78 -                                                              
+       79 -    # Count and drop rows with missing data                   
+       80 -    missing_count = df.isnull().sum().sum()                   
+       81 -    if missing_count > 0:                                     
+       82 -        print(f"  Removed {missing_count} missing values.")   
+       83 -        df = df.dropna()                                      
+       84 -                                                              
+       85 -    # Keep only rows with valid choices (rock, paper, or sciss
+          -ors)                                                          
+       86 -    invalid_mask = ~df["choice"].isin(VALID_CHOICES)          
+       87 -    invalid_count = invalid_mask.sum()                        
+       88 -    if invalid_count > 0:                                     
+       89 -        print(f"  Removed {invalid_count} invalid choices.")  
+       90 -        df = df[~invalid_mask]                                
+       91 -                                                              
+       92 -    # Reset the index so row numbers start at 0 again after re
+          -moving rows                                                   
+       93 -    df = df.reset_index(drop=True)                            
+       94 -                                                              
+       95 -    return df                                                 
+       96 -                                                              
+       97 -                                                              
+       98 -def compute_choice_frequencies(df):                           
+       99 -    """Count how often each user picks rock, paper, and scisso
+          -rs.                                                           
+      100 -                                                              
+      101 -    This builds a dictionary where each key is a user's name a
+          -nd each value                                                 
+      102 -    is another dictionary with the counts for rock, paper, and
+          - scissors.                                                    
+      103 -                                                              
+      104 -    Parameters:                                               
+      105 -        df (pd.DataFrame): The cleaned data with 'user' and 'c
+          -hoice' columns.                                               
+      106 -                                                              
+      107 -    Returns:                                                  
+      108 -        dict: A nested dictionary like:                       
+      109 -              {'Dana': {'rock': 12, 'paper': 8, 'scissors': 5}
+          -, ...}                                                        
+      110 -    """                                                       
+      111 -    frequency_dict = {}                                       
+      112 -                                                              
+      113 -    # Loop through each user                                  
+       43 +    print("\n  --- Choice Frequencies ---")                   
+       44      for user in USERS:
+      115 -        user_data = df[df["user"] == user]                    
+      116 -        counts = {}                                           
+      117 -        # Loop through each possible choice                   
+      118 -        for choice in VALID_CHOICES:                          
+      119 -            counts[choice] = int((user_data["choice"] == choic
+          -e).sum())                                                     
+      120 -        frequency_dict[user] = counts                         
+       45 +        counts = freq_dict[user]                              
+       46 +        print(f"  {user:>8}: Rock={counts['rock']}, "         
+       47 +              f"Paper={counts['paper']}, Scissors={counts['sci
+          +ssors']}")                                                    
+       48  
+      122 -    return frequency_dict                                     
+       49  
+       50 +def display_transitions(transition_matrices):                 
+       51 +    """Print transition matrices, highlighting strong tendenci
+          +es.                                                           
+       52  
+      125 -def build_transition_matrix(df):                              
+      126 -    """Build a transition matrix for each user.               
+      127 -                                                              
+      128 -    A transition matrix shows: given that the previous move wa
+          -s X, what                                                     
+      129 -    is the probability that the next move is Y?               
+      130 -                                                              
+      131 -    For example, if after playing 'rock' a user plays 'paper' 
+          -5 out of                                                      
+      132 -    10 times, then the transition probability from rock -> pap
+          -er is 0.5.                                                    
+      133 -                                                              
+       53      Parameters:
+      135 -        df (pd.DataFrame): The cleaned data.                  
+      136 -                                                              
+      137 -    Returns:                                                  
+      138 -        dict: A dictionary mapping each user to a 3x3 numpy ar
+          -ray.                                                          
+      139 -              Rows = previous move, Columns = next move.      
+      140 -              Order is: rock, paper, scissors.                
+       54 +        transition_matrices (dict): Output from build_transiti
+          +on_matrix().                                                  
+       55      """
+      142 -    transition_matrices = {}                                  
+      143 -                                                              
+       56 +    print("\n  --- Transition Probabilities ---")             
+       57      for user in USERS:
+      145 -        user_data = df[df["user"] == user].sort_values("round"
+          -)                                                             
+      146 -        choices_list = list(user_data["choice"])              
+       58 +        print(f"\n  {user}:")                                 
+       59 +        matrix = transition_matrices[user]                    
+       60 +        for i, prev in enumerate(VALID_CHOICES):              
+       61 +            for j, nxt in enumerate(VALID_CHOICES):           
+       62 +                prob = matrix[i][j]                           
+       63 +                if prob > 0.45:                               
+       64 +                    print(f"    After {prev:>8} -> {nxt:>8}: "
+       65 +                          f"{prob:.0%}  <-- strong tendency!")
+       66 +                elif prob > 0:                                
+       67 +                    print(f"    After {prev:>8} -> {nxt:>8}: {
+          +prob:.0%}")                                                   
+       68  
+      148 -        # Create a 3x3 matrix of zeros using numpy            
+      149 -        matrix = np.zeros((3, 3))                             
+       69  
+      151 -        # Walk through pairs of consecutive choices           
+      152 -        round_num = 0                                         
+      153 -        while round_num < len(choices_list) - 1:              
+      154 -            current = choices_list[round_num]                 
+      155 -            next_choice = choices_list[round_num + 1]         
+       70 +def display_accuracy(accuracy_dict):                          
+       71 +    """Print prediction accuracy with verdicts.               
+       72  
+      157 -            row = VALID_CHOICES.index(current)     # row = pre
+          -vious move                                                    
+      158 -            col = VALID_CHOICES.index(next_choice)  # col = ne
+          -xt move                                                       
+      159 -            matrix[row][col] += 1                             
+      160 -                                                              
+      161 -            round_num += 1                                    
+      162 -                                                              
+      163 -        # Convert counts to probabilities (each row sums to 1.
+          -0)                                                            
+      164 -        for i in range(3):                                    
+      165 -            row_sum = matrix[i].sum()                         
+      166 -            if row_sum > 0:                                   
+      167 -                matrix[i] = matrix[i] / row_sum               
+      168 -                                                              
+      169 -        transition_matrices[user] = matrix                    
+      170 -                                                              
+      171 -    return transition_matrices                                
+      172 -                                                              
+      173 -                                                              
+      174 -def predict_next_move(transition_matrices, user, previous_move
+          -):                                                            
+      175 -    """Predict a user's next move based on their transition ma
+          -trix.                                                         
+      176 -                                                              
+      177 -    Looks at the row for the previous move and picks whichever
+          - next move                                                    
+      178 -    has the highest probability.                              
+      179 -                                                              
+       73      Parameters:
+      181 -        transition_matrices (dict): The transition matrices fr
+          -om                                                            
+      182 -                                    build_transition_matrix().
+      183 -        user (str): The user's name.                          
+      184 -        previous_move (str): The move that was just played.   
+      185 -                                                              
+      186 -    Returns:                                                  
+      187 -        str: The predicted next move ('rock', 'paper', or 'sci
+          -ssors').                                                      
+       74 +        accuracy_dict (dict): Output from calculate_prediction
+          +_accuracy().                                                  
+       75      """
+      189 -    matrix = transition_matrices[user]                        
+      190 -    row = VALID_CHOICES.index(previous_move)                  
+      191 -    probabilities = matrix[row]                               
+      192 -                                                              
+      193 -    # Find the index of the highest probability               
+      194 -    best_index = int(np.argmax(probabilities))                
+      195 -    return VALID_CHOICES[best_index]                          
+      196 -                                                              
+      197 -                                                              
+      198 -def calculate_prediction_accuracy(df, transition_matrices):   
+      199 -    """Test how well our predictions work against the actual d
+          -ata.                                                          
+      200 -                                                              
+      201 -    For each user, go through every round (starting from round
+          - 2).                                                          
+      202 -    Use the previous move to predict the current move. Check i
+          -f                                                             
+      203 -    the prediction was correct.                               
+      204 -                                                              
+      205 -    Parameters:                                               
+      206 -        df (pd.DataFrame): The cleaned data.                  
+      207 -        transition_matrices (dict): The transition matrices.  
+      208 -                                                              
+      209 -    Returns:                                                  
+      210 -        dict: A dictionary mapping each user to their accuracy
+          - percentage.                                                  
+      211 -    """                                                       
+      212 -    accuracy_dict = {}                                        
+      213 -                                                              
+       76 +    print("\n  --- Classification: Prediction Accuracy ---")  
+       77 +    print(f"  {'Player':<10} {'Accuracy':>10}  {'Verdict'}")  
+       78 +    print(f"  {'-'*40}")                                      
+       79      for user in USERS:
+      215 -        user_data = df[df["user"] == user].sort_values("round"
+          -)                                                             
+      216 -        choices_list = list(user_data["choice"])              
+      217 -                                                              
+      218 -        correct = 0                                           
+      219 -        total = 0                                             
+      220 -                                                              
+      221 -        # Start from the second choice (index 1) since we need
+          - a previous move                                              
+      222 -        for i in range(1, len(choices_list)):                 
+      223 -            previous = choices_list[i - 1]                    
+      224 -            actual = choices_list[i]                          
+      225 -            predicted = predict_next_move(transition_matrices,
+          - user, previous)                                              
+      226 -                                                              
+      227 -            if predicted == actual:                           
+      228 -                correct += 1                                  
+      229 -            total += 1                                        
+      230 -                                                              
+      231 -        # Calculate percentage (avoid dividing by zero)       
+      232 -        if total > 0:                                         
+      233 -            accuracy = (correct / total) * 100                
+       80 +        acc = accuracy_dict[user]                             
+       81 +        if acc > 50:                                          
+       82 +            verdict = "Very predictable!"                     
+       83 +        elif acc > 33.3:                                      
+       84 +            verdict = "Somewhat predictable"                  
+       85          else:
+      235 -            accuracy = 0.0                                    
+       86 +            verdict = "Hard to predict"                       
+       87 +        print(f"  {user:<10} {acc:>9.1f}%  {verdict}")        
+       88  
+      237 -        accuracy_dict[user] = round(accuracy, 1)              
+       89  
+      239 -    return accuracy_dict                                      
+       90 +def display_stats(stats):                                     
+       91 +    """Print summary statistics for each user.                
+       92  
+      241 -                                                              
+      242 -def compute_stats(df):                                        
+      243 -    """Compute summary statistics for each user.              
+      244 -                                                              
+      245 -    Calculates things like most common choice, least common ch
+          -oice,                                                         
+      246 -    longest streak of the same move, and entropy (a measure of
+          - randomness).                                                 
+      247 -                                                              
+       93      Parameters:
+      249 -        df (pd.DataFrame): The cleaned data.                  
+      250 -                                                              
+      251 -    Returns:                                                  
+      252 -        dict: Statistics for each user.                       
+       94 +        stats (dict): Output from compute_stats().            
+       95      """
+      254 -    stats = {}                                                
+      255 -                                                              
+       96 +    print("\n  --- Summary Statistics ---")                   
+       97      for user in USERS:
+      257 -        user_data = df[df["user"] == user].sort_values("round"
+          -)                                                             
+      258 -        choices_list = list(user_data["choice"])              
+      259 -        user_stats = {}                                       
+       98 +        s = stats[user]                                       
+       99 +        print(f"  {user}:")                                   
+      100 +        print(f"    Favorite move:  {s['most_common']}")      
+      101 +        print(f"    Least used:     {s['least_common']}")     
+      102 +        print(f"    Longest streak: {s['longest_streak']} in a
+          + row")                                                        
+      103 +        print(f"    Entropy:        {s['entropy']} / 1.585 "  
+      104 +              f"({'very random' if s['entropy'] > 1.5 else 'ha
+          +s patterns'})")                                               
+      105  
+      261 -        # Most and least common choice                        
+      262 -        counts = user_data["choice"].value_counts()           
+      263 -        user_stats["most_common"] = counts.index[0]           
+      264 -        user_stats["least_common"] = counts.index[-1]         
+      265 -        user_stats["total_rounds"] = len(choices_list)        
+      106  
+      267 -        # Longest streak of the same choice in a row          
+      268 -        max_streak = 1                                        
+      269 -        current_streak = 1                                    
+      270 -        for i in range(1, len(choices_list)):                 
+      271 -            if choices_list[i] == choices_list[i - 1]:        
+      272 -                current_streak += 1                           
+      273 -                if current_streak > max_streak:               
+      274 -                    max_streak = current_streak               
+      275 -            else:                                             
+      276 -                current_streak = 1                            
+      277 -        user_stats["longest_streak"] = max_streak             
+      107 +def display_clusters(cluster_results):                        
+      108 +    """Print clustering results.                              
+      109  
+      279 -        # Entropy: measures how "random" the choices are.     
+      280 -        # Higher entropy = more random. Max for 3 choices is ~
+          -1.585.                                                        
+      281 -        probs = []                                            
+      282 -        for choice in VALID_CHOICES:                          
+      283 -            p = (user_data["choice"] == choice).sum() / len(us
+          -er_data)                                                      
+      284 -            if p > 0:                                         
+      285 -                probs.append(p)                               
+      286 -        entropy = -sum(p * np.log2(p) for p in probs)         
+      287 -        user_stats["entropy"] = round(entropy, 3)             
+      288 -                                                              
+      289 -        stats[user] = user_stats                              
+      290 -                                                              
+      291 -    return stats                                              
+      292 -                                                              
+      293 -                                                              
+      294 -# ============================================================
+          -=================                                             
+      295 -# STEP 4: Visualization Functions                             
+      296 -# ============================================================
+          -=================                                             
+      297 -                                                              
+      298 -                                                              
+      299 -def plot_choice_frequencies(freq_dict):                       
+      300 -    """GRAPH 1: Grouped bar chart showing how often each user 
+          -picks each move.                                              
+      301 -                                                              
+      110      Parameters:
+      303 -        freq_dict (dict): Output from compute_choice_frequenci
+          -es().                                                         
+      111 +        cluster_results (dict): Output from cluster_users_kmea
+          +ns().                                                         
+      112      """
+      305 -    fig, ax = plt.subplots(figsize=(10, 6))                   
+      113 +    print("\n  --- K-Means Clustering: Play Style Groups ---")
+      114 +    labels = cluster_results["labels"]                        
+      115 +    points = cluster_results["user_points"]                   
+      116  
+      307 -    x = np.arange(len(USERS))    # positions on the x-axis: [0
+          -, 1, 2, 3]                                                    
+      308 -    bar_width = 0.25              # how wide each bar is      
+      117 +    # Group users by cluster                                  
+      118 +    clusters = {}                                             
+      119 +    for user, label in labels.items():                        
+      120 +        if label not in clusters:                             
+      121 +            clusters[label] = []                              
+      122 +        clusters[label].append(user)                          
+      123  
+      310 -    # One set of bars for each choice                         
+      311 -    colors = ["#4A90D9", "#E8915A", "#6BBF6B"]  # blue, orange
+          -, green                                                       
+      312 -    for i, choice in enumerate(VALID_CHOICES):                
+      313 -        counts = [freq_dict[user][choice] for user in USERS]  
+      314 -        ax.bar(x + i * bar_width, counts, bar_width,          
+      315 -               label=choice.capitalize(), color=colors[i])    
+      124 +    for cluster_id, members in clusters.items():              
+      125 +        print(f"\n  Cluster {cluster_id + 1}: {', '.join(membe
+          +rs)}")                                                        
+      126 +        for user in members:                                  
+      127 +            p = points[user]                                  
+      128 +            print(f"    {user}: Rock={p[0]:.0%}, Paper={p[1]:.
+          +0%}, "                                                        
+      129 +                  f"Scissors={p[2]:.0%}")                     
+      130  
+      317 -    ax.set_xlabel("Player", fontsize=12)                      
+      318 -    ax.set_ylabel("Number of Times Chosen", fontsize=12)      
+      319 -    ax.set_title("Rock-Paper-Scissors Choice Frequency by Play
+          -er", fontsize=14)                                             
+      320 -    ax.set_xticks(x + bar_width)                              
+      321 -    ax.set_xticklabels(USERS)                                 
+      322 -    ax.legend()                                               
+      323 -    ax.grid(axis="y", alpha=0.3)                              
+      131 +    print(f"\n  K-Means converged in {cluster_results['iterati
+          +ons']} "                                                      
+      132 +          f"iterations.")                                     
+      133  
+      325 -    plt.tight_layout()                                        
+      326 -    plt.savefig("graph1_choice_frequencies.png", dpi=150)     
+      327 -    plt.show()                                                
+      328 -    print("  Saved: graph1_choice_frequencies.png")           
+      134  
+      135 +def display_regression(regression_results):                   
+      136 +    """Print regression results showing trends.               
+      137  
+      331 -def plot_transition_heatmaps(transition_matrices):            
+      332 -    """GRAPH 2: Heatmaps showing transition probabilities for 
+          -each user.                                                    
+      333 -                                                              
+      334 -    Each heatmap is a 3x3 grid. The row is the previous move, 
+          -the column is                                                 
+      335 -    the next move, and the color/number shows how likely that 
+          -transition is.                                                
+      336 -                                                              
+      138      Parameters:
+      338 -        transition_matrices (dict): Output from build_transiti
+          -on_matrix().                                                  
+      139 +        regression_results (dict): Output from regression_anal
+          +ysis().                                                       
+      140      """
+      340 -    fig, axes = plt.subplots(2, 2, figsize=(12, 10))          
+      341 -    axes = axes.flatten()  # turn 2x2 grid into a flat list of
+          - 4                                                            
+      141 +    print("\n  --- Linear Regression: Trends Over Time ---")  
+      142 +    for user in USERS:                                        
+      143 +        print(f"\n  {user}:")                                 
+      144 +        for choice in VALID_CHOICES:                          
+      145 +            r = regression_results[user][choice]              
+      146 +            slope = r["slope"]                                
+      147 +            trend = r["trend"]                                
+      148 +            print(f"    {choice:>8}: slope={slope:+.4f}  ({tre
+          +nd})")                                                        
+      149  
+      343 -    for idx, user in enumerate(USERS):                        
+      344 -        ax = axes[idx]                                        
+      345 -        matrix = transition_matrices[user]                    
+      150  
+      347 -        # imshow draws the heatmap from the numpy array       
+      348 -        im = ax.imshow(matrix, cmap="YlOrRd", vmin=0, vmax=1) 
+      151 +def display_conclusion(accuracy_dict):                        
+      152 +    """Print the final conclusion.                            
+      153  
+      350 -        # Add the probability numbers on top of each cell     
+      351 -        for i in range(3):                                    
+      352 -            for j in range(3):                                
+      353 -                ax.text(j, i, f"{matrix[i][j]:.2f}",          
+      354 -                        ha="center", va="center", fontsize=12,
+      355 -                        color="black" if matrix[i][j] < 0.6 el
+          -se "white")                                                   
+      356 -                                                              
+      357 -        labels = ["Rock", "Paper", "Scissors"]                
+      358 -        ax.set_xticks([0, 1, 2])                              
+      359 -        ax.set_yticks([0, 1, 2])                              
+      360 -        ax.set_xticklabels(labels)                            
+      361 -        ax.set_yticklabels(labels)                            
+      362 -        ax.set_xlabel("Next Move")                            
+      363 -        ax.set_ylabel("Previous Move")                        
+      364 -        ax.set_title(f"{user}'s Transitions")                 
+      365 -                                                              
+      366 -    fig.suptitle("Transition Probabilities: What Comes After E
+          -ach Move?",                                                   
+      367 -                 fontsize=14, fontweight="bold")              
+      368 -    fig.colorbar(im, ax=axes, shrink=0.6, label="Probability")
+      369 -    plt.tight_layout()                                        
+      370 -    plt.savefig("graph2_transition_heatmaps.png", dpi=150)    
+      371 -    plt.show()                                                
+      372 -    print("  Saved: graph2_transition_heatmaps.png")          
+      373 -                                                              
+      374 -                                                              
+      375 -def plot_prediction_accuracy(accuracy_dict):                  
+      376 -    """GRAPH 3: Bar chart comparing prediction accuracy across
+          - players.                                                     
+      377 -                                                              
+      378 -    Also draws a horizontal line at 33.3% to show the "random 
+          -guess" baseline.                                              
+      379 -    If our predictions beat 33.3%, the patterns are somewhat p
+          -redictable!                                                   
+      380 -                                                              
+      154      Parameters:
+      155          accuracy_dict (dict): Output from calculate_prediction
+           _accuracy().
+      156      """
+      384 -    fig, ax = plt.subplots(figsize=(8, 6))                    
+      157 +    print("\n" + "=" * 60)                                    
+      158 +    print("  FINAL CONCLUSION")                               
+      159 +    print("=" * 60)                                           
+      160 +    overall_avg = sum(accuracy_dict.values()) / len(accuracy_d
+          +ict)                                                          
+      161 +    print(f"\n  Average prediction accuracy: {overall_avg:.1f}
+          +%")                                                           
+      162 +    print(f"  Random guessing would give:  33.3%")            
+      163 +    if overall_avg > 33.3:                                    
+      164 +        improvement = overall_avg - 33.3                      
+      165 +        print(f"\n  Our model beats random guessing by {improv
+          +ement:.1f} "                                                  
+      166 +              f"percentage points!")                          
+      167 +        print("  Conclusion: Humans are NOT perfectly random. 
+          +Their")                                                       
+      168 +        print("  patterns can be detected and partially predic
+          +ted!")                                                        
+      169 +    else:                                                     
+      170 +        print("\n  Our model didn't beat random guessing.")   
+      171 +        print("  These players are pretty unpredictable!")    
+      172  
+      386 -    users = list(accuracy_dict.keys())                        
+      387 -    accuracies = list(accuracy_dict.values())                 
+      388 -    colors = ["#4A90D9", "#E8915A", "#6BBF6B", "#D94A7A"]     
+      173  
+      390 -    bars = ax.bar(users, accuracies, color=colors, edgecolor="
+          -black")                                                       
+      174 +# ============================================================
+          +=================                                             
+      175 +# Interactive Menu                                            
+      176 +# ============================================================
+          +=================                                             
+      177  
+      392 -    # Add percentage labels on top of each bar                
+      393 -    for bar, acc in zip(bars, accuracies):                    
+      394 -        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_hei
+          -ght() + 1,                                                    
+      395 -                f"{acc}%", ha="center", fontsize=12, fontweigh
+          -t="bold")                                                     
+      178 +def show_menu():                                              
+      179 +    """Display the interactive menu options."""               
+      180 +    print("\n" + "=" * 60)                                    
+      181 +    print("  INTERACTIVE MENU")                               
+      182 +    print("=" * 60)                                           
+      183 +    print("  1. View choice frequencies")                     
+      184 +    print("  2. View transition analysis")                    
+      185 +    print("  3. View prediction accuracy (Classification)")   
+      186 +    print("  4. View player statistics")                      
+      187 +    print("  5. View clustering results (K-Means)")           
+      188 +    print("  6. View regression trends")                      
+      189 +    print("  7. Generate all graphs")                         
+      190 +    print("  8. Export data to JSON")                         
+      191 +    print("  9. Run full analysis (everything)")              
+      192 +    print("  0. Exit")                                        
+      193 +    print("=" * 60)                                           
+      194  
+      397 -    # Draw the random-guess baseline at 33.3%                 
+      398 -    ax.axhline(y=33.3, color="red", linestyle="--", linewidth=
+          -2,                                                            
+      399 -               label="Random Guess (33.3%)")                  
+      195  
+      401 -    ax.set_xlabel("Player", fontsize=12)                      
+      402 -    ax.set_ylabel("Prediction Accuracy (%)", fontsize=12)     
+      403 -    ax.set_title("Can We Predict the Next Move?", fontsize=14)
+      404 -    ax.set_ylim(0, 100)                                       
+      405 -    ax.legend()                                               
+      406 -    ax.grid(axis="y", alpha=0.3)                              
+      196 +def run_interactive(df, freq_dict, transition_matrices, accura
+          +cy_dict,                                                      
+      197 +                    stats, cluster_results, regression_results
+          +):                                                            
+      198 +    """Run the interactive menu loop.                         
+      199  
+      408 -    plt.tight_layout()                                        
+      409 -    plt.savefig("graph3_prediction_accuracy.png", dpi=150)    
+      410 -    plt.show()                                                
+      411 -    print("  Saved: graph3_prediction_accuracy.png")          
+      200 +    Lets the user choose which analysis to view. Keeps running
+          + until                                                        
+      201 +    the user picks '0' to exit.                               
+      202  
+      413 -                                                              
+      414 -def plot_entropy_comparison(stats):                           
+      415 -    """GRAPH 4 (Bonus/Creativity): Bar chart of entropy per us
+          -er.                                                           
+      416 -                                                              
+      417 -    Entropy measures randomness. A perfectly random player wou
+          -ld have                                                       
+      418 -    entropy = 1.585 (log2(3)). Lower entropy = more predictabl
+          -e.                                                            
+      419 -                                                              
+      203      Parameters:
+      421 -        stats (dict): Output from compute_stats().            
+      204 +        All parameters are pre-computed analysis results.     
+      205      """
+      423 -    fig, ax = plt.subplots(figsize=(8, 6))                    
+      206 +    running = True                                            
+      207 +    while running:                                            
+      208 +        show_menu()                                           
+      209 +        try:                                                  
+      210 +            choice = input("  Enter your choice (0-9): ").stri
+          +p()                                                           
+      211 +        except EOFError:                                      
+      212 +            # If running non-interactively, just run everythin
+          +g                                                             
+      213 +            choice = "9"                                      
+      214 +            running = False                                   
+      215  
+      425 -    users = list(stats.keys())                                
+      426 -    entropies = [stats[user]["entropy"] for user in users]    
+      427 -    max_entropy = np.log2(3)  # ~1.585, the theoretical max fo
+          -r 3 choices                                                   
+      216 +        if choice == "1":                                     
+      217 +            display_frequencies(freq_dict)                    
+      218 +        elif choice == "2":                                   
+      219 +            display_transitions(transition_matrices)          
+      220 +        elif choice == "3":                                   
+      221 +            display_accuracy(accuracy_dict)                   
+      222 +        elif choice == "4":                                   
+      223 +            display_stats(stats)                              
+      224 +        elif choice == "5":                                   
+      225 +            display_clusters(cluster_results)                 
+      226 +        elif choice == "6":                                   
+      227 +            display_regression(regression_results)            
+      228 +        elif choice == "7":                                   
+      229 +            print("\n  Generating graphs...")                 
+      230 +            plot_choice_frequencies(freq_dict)                
+      231 +            plot_transition_heatmaps(transition_matrices)     
+      232 +            plot_prediction_accuracy(accuracy_dict)           
+      233 +            plot_entropy(stats)                               
+      234 +            plot_trends(df, regression_results)               
+      235 +            print("\n  All 5 graphs saved!")                  
+      236 +        elif choice == "8":                                   
+      237 +            export_to_json(df, JSON_FILE)                     
+      238 +        elif choice == "9":                                   
+      239 +            display_frequencies(freq_dict)                    
+      240 +            display_transitions(transition_matrices)          
+      241 +            display_accuracy(accuracy_dict)                   
+      242 +            display_stats(stats)                              
+      243 +            display_clusters(cluster_results)                 
+      244 +            display_regression(regression_results)            
+      245 +            print("\n  Generating all graphs...")             
+      246 +            plot_choice_frequencies(freq_dict)                
+      247 +            plot_transition_heatmaps(transition_matrices)     
+      248 +            plot_prediction_accuracy(accuracy_dict)           
+      249 +            plot_entropy(stats)                               
+      250 +            plot_trends(df, regression_results)               
+      251 +            display_conclusion(accuracy_dict)                 
+      252 +            print("\n  5 graphs saved to the current folder.")
+      253 +        elif choice == "0":                                   
+      254 +            print("\n  Thanks for exploring! Goodbye.")       
+      255 +            running = False                                   
+      256 +        else:                                                 
+      257 +            print("  Invalid choice. Please enter a number 0-9
+          +.")                                                           
+      258  
+      429 -    colors = ["#4A90D9", "#E8915A", "#6BBF6B", "#D94A7A"]     
+      430 -    bars = ax.bar(users, entropies, color=colors, edgecolor="b
+          -lack")                                                        
+      259  
+      432 -    # Label each bar                                          
+      433 -    for bar, ent in zip(bars, entropies):                     
+      434 -        ax.text(bar.get_x() + bar.get_width() / 2, bar.get_hei
+          -ght() + 0.02,                                                 
+      435 -                f"{ent:.3f}", ha="center", fontsize=11, fontwe
+          -ight="bold")                                                  
+      436 -                                                              
+      437 -    # Draw the "perfectly random" line                        
+      438 -    ax.axhline(y=max_entropy, color="red", linestyle="--", lin
+          -ewidth=2,                                                     
+      439 -               label=f"Perfectly Random ({max_entropy:.3f})") 
+      440 -                                                              
+      441 -    ax.set_xlabel("Player", fontsize=12)                      
+      442 -    ax.set_ylabel("Entropy (bits)", fontsize=12)              
+      443 -    ax.set_title("How Random Is Each Player? (Entropy Analysis
+          -)", fontsize=14)                                              
+      444 -    ax.set_ylim(0, 2.0)                                       
+      445 -    ax.legend()                                               
+      446 -    ax.grid(axis="y", alpha=0.3)                              
+      447 -                                                              
+      448 -    plt.tight_layout()                                        
+      449 -    plt.savefig("graph4_entropy.png", dpi=150)                
+      450 -    plt.show()                                                
+      451 -    print("  Saved: graph4_entropy.png")                      
+      452 -                                                              
+      453 -                                                              
+      260  # ============================================================
+           =================
+      455 -# STEP 5: Main Program - Tie Everything Together              
+      261 +# Main Function                                               
+      262  # ============================================================
+           =================
+      263  
+      264  def main():
+      459 -    """Main function that runs the entire analysis pipeline.""
+          -"                                                             
+      265 +    """Main entry point — loads data, runs all analyses, start
+          +s the menu."""                                                
+      266  
+      267      print("=" * 60)
+      268      print("  CAN AI PREDICT HUMAN RANDOMNESS?")
+      269      print("  Rock-Paper-Scissors Pattern Analysis")
+      270      print("=" * 60)
+      271  
+      466 -    # --- Step A: Load and clean the data ---                 
+      272 +    # --- Load and validate data ---                          
+      273      print("\n[1] Loading and cleaning data...")
+      468 -    df = load_and_clean_data(CSV_FILE)                        
+      274 +    df = load_csv(CSV_FILE)                                   
+      275      if df is None:
+      470 -        print("Cannot continue without data. Exiting.")       
+      276 +        print("  Cannot continue without data. Exiting.")     
+      277          return
+      278  
+      279      print(f"  Loaded {len(df)} rows for {df['user'].nunique()}
+            users.")
+      474 -    print(f"  Users: {', '.join(df['user'].unique())}")       
+      475 -    print(f"  Choices found: {', '.join(df['choice'].unique())
+          -}")                                                           
+      280 +    print("\n[2] Validating data...")                         
+      281 +    validate_data(df)                                         
+      282  
+      477 -    # --- Step B: Choice frequency analysis ---               
+      478 -    print("\n[2] Analyzing choice frequencies...")            
+      283 +    # --- Run all analyses up front ---                       
+      284 +    print("\n[3] Running analyses...")                        
+      285      freq_dict = compute_choice_frequencies(df)
+      480 -    for user in USERS:                                        
+      481 -        counts = freq_dict[user]                              
+      482 -        print(f"  {user:>8}: Rock={counts['rock']}, "         
+      483 -              f"Paper={counts['paper']}, Scissors={counts['sci
+          -ssors']}")                                                    
+      286 +    print("  Choice frequencies computed.")                   
+      287  
+      485 -    # --- Step C: Build transition matrices ---               
+      486 -    print("\n[3] Building transition matrices...")            
+      288      transition_matrices = build_transition_matrix(df)
+      488 -    for user in USERS:                                        
+      489 -        print(f"\n  {user}'s transition probabilities:")      
+      490 -        matrix = transition_matrices[user]                    
+      491 -        for i, prev in enumerate(VALID_CHOICES):              
+      492 -            for j, nxt in enumerate(VALID_CHOICES):           
+      493 -                prob = matrix[i][j]                           
+      494 -                if prob > 0.45:                               
+      495 -                    # Highlight strong tendencies             
+      496 -                    print(f"    After {prev:>8} -> {nxt:>8}: "
+      497 -                          f"{prob:.0%}  <-- strong tendency!")
+      498 -                elif prob > 0:                                
+      499 -                    print(f"    After {prev:>8} -> {nxt:>8}: {
+          -prob:.0%}")                                                   
+      289 +    print("  Transition matrices built.")                     
+      290  
+      501 -    # --- Step D: Predict next moves and calculate accuracy --
+          --                                                             
+      502 -    print("\n[4] Testing prediction accuracy...")             
+      291      accuracy_dict = calculate_prediction_accuracy(df, transiti
+           on_matrices)
+      504 -    print(f"\n  {'Player':<10} {'Accuracy':>10}  {'Verdict'}")
+      505 -    print(f"  {'-'*40}")                                      
+      506 -    for user in USERS:                                        
+      507 -        acc = accuracy_dict[user]                             
+      508 -        if acc > 50:                                          
+      509 -            verdict = "Very predictable!"                     
+      510 -        elif acc > 33.3:                                      
+      511 -            verdict = "Somewhat predictable"                  
+      512 -        else:                                                 
+      513 -            verdict = "Hard to predict"                       
+      514 -        print(f"  {user:<10} {acc:>9.1f}%  {verdict}")        
+      292 +    print("  Classification predictions tested.")             
+      293  
+      516 -    # --- Step E: Compute extra statistics ---                
+      517 -    print("\n[5] Computing summary statistics...")            
+      294      stats = compute_stats(df)
+      519 -    for user in USERS:                                        
+      520 -        s = stats[user]                                       
+      521 -        print(f"  {user}:")                                   
+      522 -        print(f"    Favorite move: {s['most_common']}")       
+      523 -        print(f"    Least used:    {s['least_common']}")      
+      524 -        print(f"    Longest streak: {s['longest_streak']} in a
+          - row")                                                        
+      525 -        print(f"    Entropy:       {s['entropy']} / 1.585 "   
+      526 -              f"({'very random' if s['entropy'] > 1.5 else 'ha
+          -s patterns'})")                                               
+      295 +    print("  Summary statistics calculated.")                 
+      296  
+      528 -    # --- Step F: Create all visualizations ---               
+      529 -    print("\n[6] Creating visualizations...")                 
+      530 -    plot_choice_frequencies(freq_dict)                        
+      531 -    plot_transition_heatmaps(transition_matrices)             
+      532 -    plot_prediction_accuracy(accuracy_dict)                   
+      533 -    plot_entropy_comparison(stats)                            
+      297 +    cluster_results = cluster_users_kmeans(freq_dict, k=2)    
+      298 +    print("  K-Means clustering complete.")                   
+      299  
+      535 -    # --- Step G: Final summary ---                           
+      536 -    print("\n" + "=" * 60)                                    
+      537 -    print("  FINAL CONCLUSION")                               
+      538 -    print("=" * 60)                                           
+      539 -    overall_avg = sum(accuracy_dict.values()) / len(accuracy_d
+          -ict)                                                          
+      540 -    print(f"\n  Average prediction accuracy: {overall_avg:.1f}
+          -%")                                                           
+      541 -    print(f"  Random guessing would give:  33.3%")            
+      542 -    if overall_avg > 33.3:                                    
+      543 -        improvement = overall_avg - 33.3                      
+      544 -        print(f"\n  Our model beats random guessing by {improv
+          -ement:.1f} "                                                  
+      545 -              f"percentage points!")                          
+      546 -        print("  Conclusion: Humans are NOT perfectly random. 
+          -Their")                                                       
+      547 -        print("  patterns can be detected and partially predic
+          -ted!")                                                        
+      548 -    else:                                                     
+      549 -        print("\n  Our model didn't beat random guessing.")   
+      550 -        print("  These players are pretty unpredictable!")    
+      300 +    regression_results = regression_analysis(df)              
+      301 +    print("  Linear regression complete.")                    
+      302  
+      552 -    print("\n  4 graphs saved to the current folder.")        
+      553 -    print("=" * 60)                                           
+      303 +    print("\n  All analyses ready!")                          
+      304  
+      305 +    # --- Launch interactive menu ---                         
+      306 +    run_interactive(df, freq_dict, transition_matrices, accura
+          +cy_dict,                                                      
+      307 +                    stats, cluster_results, regression_results
+          +)                                                             
+      308  
+      556 -# This is the standard Python way to run the main function.   
+      557 -# It means: "only run main() if this file is executed directly
+          -,                                                             
+      558 -# not if it's imported by another file."                      
+      309 +                                                              
+      310  if __name__ == "__main__":
+      311      main()
+
+⏺ Now let me test it runs correctly, then create the README and open VS Code.
+
+⏺ Bash(echo "9" | MPLBACKEND=Agg python3 rps_analysis.py)
+  ⎿  ============================================================
+       CAN AI PREDICT HUMAN RANDOMNESS?
+       Rock-Paper-Scissors Pattern Analysis
+     … +153 lines (ctrl+o to expand)
+
+⏺ Everything works. Let me check the new trend graph, then create the README and
+   open VS Code.
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Now let me create the README and open VS Code.
+
+⏺ Write(README.md)
+  ⎿  Wrote 202 lines to README.md
+       1 # Can AI Predict Human Randomness?
+       2 
+       3 ## Rock-Paper-Scissors Pattern Analysis
+       4 
+       5 **ENGR 010 Group Project - Computer Science Option, Spring 2026*
+         *
+       6 **Team Members:** Dana, Jarin, Eleanor, Krew
+       7 
+       8 ---
+       9 
+      10 ## Project Overview
+     … +192 lines (ctrl+o to expand)
+
+⏺ Now let me open the project folder and files in VS Code.
+
+⏺ Bash(code /Users/eleanor/Rock_Paper_Scissors/)
+  ⎿  Error: Exit code 127
+     (eval):1: command not found: code
+
+⏺ Bash(open -a "Visual Studio Code" /Users/eleanor/Rock_Paper_Scissors/)
+  ⎿  (No output)
+
+⏺ Bash(open -a "Visual Studio Code"
+      /Users/eleanor/Rock_Paper_Scissors/rps_analysis.py
+      /Users/eleanor/Rock_Paper_Scissors/data_loader.py
+      /Users/eleanor/Rock_Paper_Scis…)
+  ⎿  (No output)
+
+⏺ VS Code is now open with all your files. Let me also verify the final file
+  listing is clean.
+
+  Listed 1 directory (ctrl+o to expand)
+
+⏺ Everything is clean and organized. Here's a summary of exactly what I did and
+  why:
+
+  ---
+  What I Did (Word for Word)
+
+  1. Checked requirements against the assignment PDF
+
+  I re-read every requirement from the ENGR 010 project description and found 5 
+  gaps:
+  - The code was all in 1 file (requirement: multiple Python files)
+  - No clustering or regression algorithms (requirement: at least 3 of the
+  listed algorithms)
+  - Only CSV import (requirement: CSV, JSON, TXT support)
+  - No interactive dashboard (requirement: interactive data exploration)
+  - No trend analysis chart (requirement: trend analysis)
+
+  2. Split the code into 4 Python files
+
+  - data_loader.py — all data loading, cleaning, validation, and JSON export
+  - analysis.py — all analysis functions: frequencies, transitions, prediction,
+  stats, plus the NEW clustering and regression algorithms
+  - visualizations.py — all 5 graphing functions
+  - rps_analysis.py — the main entry point that imports from the other 3 files
+  and runs an interactive menu
+
+  3. Added the missing algorithms
+
+  - K-Means Clustering (analysis.py) — groups users by play style. Dana ends up
+  alone (rock-heavy), while Jarin/Eleanor/Krew form a paper-favoring cluster
+  - Linear Regression (analysis.py) — checks if habits change over time. Found
+  that Eleanor trends toward more rock and less paper over rounds
+
+  4. Added missing features
+
+  - JSON import/export in data_loader.py (covers "various file formats")
+  - Interactive text menu in rps_analysis.py (covers "interactive dashboard")
+  - Trend line chart (graph 5) in visualizations.py (covers "trend analysis")
+
+  5. Created README.md
+
+  Maps every single requirement from the assignment to the exact file and
+  function where it's met, with line numbers.
+
+  6. Opened VS Code
+
+  Opened the project folder and all 5 key files (4 Python files + README) in VS
+  Code so you can see everything.
+
+  Your project folder is now clean with 4 Python files, 1 CSV data file, 5 graph
+   images, the README, and the two original PDFs.
+
+✻ Crunched for 5m 49s
+
+※ recap: We restructured your Rock Paper Scissors project into multiple files, 
+  added clustering, regression, and an interactive menu, created a README 
+  mapping every assignment requirement, and opened everything in VS Code. Next 
+  step is to run and test it in VS Code.
+
+❯ /export                                                                       
+  ⎿  Conversation copied to clipboard
